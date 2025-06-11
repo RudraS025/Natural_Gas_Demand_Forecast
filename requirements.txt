@@ -1,4 +1,3 @@
-# requirements.txt for Natural Gas Demand Forecasting
 pandas
 numpy
 scikit-learn
