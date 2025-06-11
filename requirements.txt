@@ -5,4 +5,4 @@ openpyxl
 flask
 gunicorn
 joblib
-xgboost
+xgboost==1.7.6
