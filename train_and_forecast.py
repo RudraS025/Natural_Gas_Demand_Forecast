@@ -7,6 +7,7 @@ from tensorflow.keras.layers import Dense, ELU
 from tensorflow.keras.callbacks import EarlyStopping
 import matplotlib.pyplot as plt
 import os
+import joblib
 
 # Load data
 df = pd.read_excel('NaturalGasDemand_Input.xlsx', engine='openpyxl')
@@ -24,7 +25,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle
 
 # Standardization
 scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
+scaler.fit(X_train)
+joblib.dump(scaler, 'scaler.save')
+X_train_scaled = scaler.transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
 # Build deep neural network
@@ -65,5 +68,10 @@ plt.close()
 # Save results to Excel
 results = pd.DataFrame({'Month': y_test.index, 'Actual': y_test.values, 'Predicted': y_pred})
 results.to_excel('test_vs_prediction_results.xlsx', index=False)
+
+# Save feature names for Flask app
+with open('feature_names.txt', 'w') as f:
+    for col in X_train.columns:
+        f.write(f"{col}\n")
 
 print('Model training complete. Model and results saved.')
