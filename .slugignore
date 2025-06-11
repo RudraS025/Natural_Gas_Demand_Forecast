@@ -16,7 +16,6 @@
 *.docx
 *.pptx
 *.md
-*.txt
 train_and_forecast.py
 save_scaler.py
 rf_test_vs_prediction_results.xlsx
@@ -27,3 +26,4 @@ xgb_test_vs_prediction_results.xlsx
 xgb_test_vs_prediction.png
 NaturalGasDemand_Input.xlsx
 NaturalGasDemand_Future_Input.xlsx
+# requirements.txt must NOT be excluded!
